@@ -15,9 +15,11 @@ public class Main {
     public static void main(String[] args){
 
         Properties property = new Properties();
+        FileInputStream fis;
 
         try {
-            FileInputStream fis = new FileInputStream(PATH_TO_CONFIG);
+            if (args.length==0) fis = new FileInputStream(PATH_TO_CONFIG);
+            else fis = new FileInputStream(args[0]);
             property.load(fis);
 
             long delayTime = Long.parseLong(property.getProperty("time.delayTime"));
