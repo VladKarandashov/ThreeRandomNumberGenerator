@@ -14,3 +14,14 @@
 ```
 java -jar ThreeRandomNumberGenerator.jar config.properties
 ```
+
+Для того чтобы автоматически посылать POST запросы на сервер можно писать:
+```
+java -jar ThreeRandomNumberGenerator.jar config.properties | xargs -n 3 ./script.sh
+```
+Где script.sh будет:
+```
+#!/bin/bash
+curl -X POST http://localhost:8080/putNote -H "Content-Type: application/json" -d '{"member" : '$1', "group" : '$2', "item" : '$3'}'
+echo send  $1 $2 $3
+```
